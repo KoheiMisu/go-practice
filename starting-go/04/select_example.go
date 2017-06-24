@@ -13,8 +13,7 @@ func main() {
 	go func() {
 		for {
 			i := <-ch1
-			ch2 <- (i * 2)
-		}
+			ch2 <- (i *
 	}()
 
 	// ch2から受信した整数を1減算してch3へ送信
