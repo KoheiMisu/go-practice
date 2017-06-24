@@ -23,4 +23,13 @@ func main() {
 	// 受信の処理はチャネルが内包する型の初期値を受信する
 	t := <-ch2
 	fmt.Println(t) // => 0
+
+	// チャネルがクローズされているか調べる
+	ch3 := make(chan int)
+	close(ch3)
+
+	i, ok := <-ch // i ==0, ok == false
+
+	// チャネルに残存するデータがある場合はtrueを返す
+
 }
