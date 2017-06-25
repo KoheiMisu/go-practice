@@ -25,6 +25,18 @@ type Person struct {
 	Area string
 }
 
+type User struct {
+	Id   int
+	Name string
+}
+
+func NewUser(id int, name string) *User {
+	u := new(User)
+	u.Id = id
+	u.Name = name
+	return u
+}
+
 // 再帰的な定義の禁止
 // 自身の型を含むようなstructは作成できない
 //type T struct {
