@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"reflect"
 )
@@ -8,6 +9,11 @@ import (
 type User struct {
 	Id   int    "ID"
 	Name string "名前"
+}
+
+type Author struct {
+	Id   int    `json:"author_id"`
+	Name string `json:"author_name"`
 }
 
 func main() {
@@ -22,4 +28,9 @@ func main() {
 		f := t.Field(i)
 		fmt.Println(f.Name, f.Tag)
 	}
+
+	a := Author{999, "999"}
+	bs, _ := json.Marshal(a)
+	fmt.Println(string(bs))
+	fmt.Printf("%s\n", bs)
 }
