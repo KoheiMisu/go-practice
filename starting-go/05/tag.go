@@ -12,7 +12,7 @@ type User struct {
 }
 
 type Author struct {
-	Id   int    `json:"author_id"`
+	Id   int    `json:"author_id"` // jsonパッケージが出力時のキーを拾うように設定
 	Name string `json:"author_name"`
 }
 
