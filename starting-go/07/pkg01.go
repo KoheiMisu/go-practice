@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 )
 
 func main() {
@@ -11,6 +12,9 @@ func main() {
 	defer func() {
 		fmt.Println("defer")
 	}()
+
+	fmt.Println(time.January)
+	fmt.Println(time.January.String())
 
 	_, err := os.Open("foo!!!")
 	if err != nil {
