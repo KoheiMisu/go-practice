@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"regexp"
 	"sync"
+	"time"
 )
 
 var wg sync.WaitGroup
@@ -18,7 +19,7 @@ var re = regexp.MustCompile(`<title>.*</title>`)
 func main() {
 	queue := make(chan string)
 
-	for i := 0; i < 4; i++ { // generate 2 goroutine
+	for i := 0; i < 2; i++ { // generate 2 goroutine
 		wg.Add(1)
 		go fetchURL(queue)
 	}
@@ -32,9 +33,10 @@ func main() {
 	wg.Wait()    // wait until all goroutine finish
 }
 
-func fetchURL(queue chan string) {
+func fetchURL(queue <-chan string) {
 	for {
 		url, more := <-queue // if close, more will be false
+		fmt.Println(more)
 		if more {
 			// get url
 			fmt.Println("fetching url", url)
@@ -53,6 +55,7 @@ func fetchURL(queue chan string) {
 				title := re.FindString(bodyString)
 				fmt.Println(title)
 			}
+			time.Sleep(1 * time.Second)
 		} else {
 			fmt.Println("worker exit")
 			wg.Done()
